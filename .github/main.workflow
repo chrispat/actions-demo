@@ -3,6 +3,7 @@ workflow "File Test" {
   resolves = [
     "ip-info",
     "machine-id-1",
+    "machine-id-2"
   ]
 }
 
@@ -36,7 +37,13 @@ action "ip-info" {
 }
 
 action "machine-id-1" {
-  needs = ["100-mb-file"]
   uses = "actions/docker/cli@6495e70"
-  args = "run -i --rm -v /etc:/hostetc alpine cat /etc/machine-id"
+  args = "run -i --rm -v /etc:/hostetc alpine cat /hostetc/machine-id"
 }
+
+action "machine-id-2" {
+  needs = ["ip-info"]
+  uses = "actions/docker/cli@6495e70"
+  args = "run -i --rm -v /etc:/hostetc alpine cat /hostetc/machine-id"
+}
+
