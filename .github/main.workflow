@@ -1,6 +1,9 @@
 workflow "File Test" {
   on = "push"
-  resolves = ["ip-info"]
+  resolves = [
+    "ip-info",
+    "GitHub Action for Docker",
+  ]
 }
 
 action "100-mb-file" {
@@ -21,16 +24,19 @@ action "300-mb-file" {
 }
 
 action "list-files" {
-   uses = "docker://debian:latest"
-   args = "ls -la"
-   needs = ["200-mb-file", "300-mb-file"]
+  uses = "docker://debian:latest"
+  args = "ls -la"
+  needs = ["200-mb-file", "300-mb-file"]
 }
 
 action "ip-info" {
-   uses = "docker://appropriate/curl"
-   args = "ifconfig.co"
-   needs = ["list-files"]
+  uses = "docker://appropriate/curl"
+  args = "ifconfig.co"
+  needs = ["list-files"]
 }
 
-
-
+action "machine-id" {
+  needs = ["100-mb-file"]
+  uses = "actions/docker/cli@6495e70"
+  args = "run -i --rm -v /etc:/hostetc alpine cat /etc/machine-id"
+}
