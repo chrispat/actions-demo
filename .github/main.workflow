@@ -2,7 +2,7 @@ workflow "File Test" {
   on = "push"
   resolves = [
     "ip-info",
-    "GitHub Action for Docker",
+    "machine-id-1",
   ]
 }
 
@@ -35,7 +35,7 @@ action "ip-info" {
   needs = ["list-files"]
 }
 
-action "machine-id" {
+action "machine-id-1" {
   needs = ["100-mb-file"]
   uses = "actions/docker/cli@6495e70"
   args = "run -i --rm -v /etc:/hostetc alpine cat /etc/machine-id"
