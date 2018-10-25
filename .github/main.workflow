@@ -27,8 +27,8 @@ action "list-files" {
 }
 
 action "ip-info" {
-   uses = "docker://debian:latest"
-   args = "curl ifconfig.co"
+   uses = "docker://appropriate/curl"
+   args = "ifconfig.co"
    needs = ["list-files"]
 }
 
