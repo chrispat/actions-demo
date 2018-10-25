@@ -1,6 +1,6 @@
 workflow "File Test" {
   on = "push"
-  resolves = ["list-files"]
+  resolves = ["ip-info"]
 }
 
 action "100-mb-file" {
@@ -25,3 +25,12 @@ action "list-files" {
    args = "ls -la"
    needs = ["200-mb-file", "300-mb-file"]
 }
+
+action "ip-info" {
+   uses = "docker://debian:latest"
+   args = "curl ifconfig.co"
+   needs = ["list-files"]
+}
+
+
+
