@@ -10,13 +10,13 @@ action "100-mb-file" {
 
 action "200-mb-file" {
   uses = "docker://debian:latest"
-  args = "dd if=/dev/urandom of=file100mb.txt bs=1048576 count=100"
+  args = "dd if=/dev/urandom of=file200mb.txt bs=1048576 count=200"
   needs = ["100-mb-file"]
 }
 
 action "300-mb-file" {
   uses = "docker://debian:latest"
-  args = "dd if=/dev/urandom of=file100mb.txt bs=1048576 count=100"
+  args = "dd if=/dev/urandom of=file300mb.txt bs=1048576 count=300"
   needs = ["100-mb-file"]
 }
 
