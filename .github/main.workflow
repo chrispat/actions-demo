@@ -7,6 +7,6 @@ action "Reputation Checker" {
   uses = "./.github/reputation-checker"
   secrets = ["GITHUB_TOKEN"]
   env = {
-    MIN_FOLLOWER_COUNT = "100"
+    MIN_FOLLOWER_COUNT = "10"
   }
 }
