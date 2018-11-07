@@ -4,7 +4,7 @@ workflow "Check Commentor Reputation" {
 }
 
 action "Reputation Checker" {
-  uses = "./.github/reputation-checker"
+  uses = "docker://chrisrpatterson/reputation-checker"
   secrets = ["GITHUB_TOKEN"]
   env = {
     MIN_FOLLOWER_COUNT = "10"
