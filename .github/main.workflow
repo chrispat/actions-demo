@@ -1,8 +1,6 @@
 workflow "File Test" {
-  resolves = [
-    "list-files",
-  ]
-  on = "member"
+  on = "issue_comment"
+  resolves = ["dump-env"]
 }
 
 action "dump-event" {
@@ -10,8 +8,9 @@ action "dump-event" {
   args = "cat /github/workflow/event.json"
 }
 
-action "list-files" {
+action "dump-env" {
   uses = "docker://debian:latest"
   needs = ["dump-event"]
   args = "env"
+  secrets = ["GITHUB_TOKEN"]
 }
