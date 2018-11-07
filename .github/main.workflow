@@ -2,7 +2,7 @@ workflow "File Test" {
   resolves = [
     "list-files",
   ]
-  on = "issue_comment"
+  on = "member"
 }
 
 action "dump-event" {
