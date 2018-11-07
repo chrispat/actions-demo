@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -ex
+
 $user_url=$(cat $GITHUB_EVENT_PATH | jq -r .comment.user.url)
 
 $followers=$(curl -s $user_url | jq -r .followers)
