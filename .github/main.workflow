@@ -1,6 +1,6 @@
 workflow "File Test" {
   on = "issue_comment"
-  resolves = ["dump-env"]
+  resolves = ["Reputation Checker"]
 }
 
 action "dump-event" {
@@ -12,5 +12,11 @@ action "dump-env" {
   uses = "docker://debian:latest"
   needs = ["dump-event"]
   args = "env"
+  secrets = ["GITHUB_TOKEN"]
+}
+
+action "Reputation Checker" {
+  uses = "./.github/reputation-checker"
+  needs = ["dump-env"]
   secrets = ["GITHUB_TOKEN"]
 }
