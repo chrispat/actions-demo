@@ -5,9 +5,9 @@ LABEL "com.github.actions.description"="Checks reputation for commenters and add
 LABEL "com.github.actions.icon"="mic"
 LABEL "com.github.actions.color"="purple"
 
-RUN apk add --no-cache --virtual \
-    curl \
-    jq
+RUN apk add --no-cache --virtual curl;
+
+RUN apk add --no-cache --virtual jq;
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
