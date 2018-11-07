@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/usr/bin/env bash
 
 $user_url=$(cat $GITHUB_EVENT_PATH | jq -r .comment.user.url)
 

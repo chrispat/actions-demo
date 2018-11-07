@@ -1,15 +1,13 @@
-FROM debian:9.5-slim
+FROM bash
 
 LABEL "com.github.actions.name"="Reputation Checker"
 LABEL "com.github.actions.description"="Checks reputation for commenters and adds a label"
 LABEL "com.github.actions.icon"="mic"
 LABEL "com.github.actions.color"="purple"
 
-RUN apt-get update \
- && apt-get install -y --no-install-recommends \
+RUN apk add --no-cache --virtual \
     curl \
-    jq \
- && rm -rf /var/lib/apt/lists/*
+    jq
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
