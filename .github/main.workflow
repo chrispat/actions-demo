@@ -1,4 +1,4 @@
-workflow "File Test" {
+workflow "Check Commentor Reputation" {
   on = "issue_comment"
   resolves = ["Reputation Checker"]
 }
