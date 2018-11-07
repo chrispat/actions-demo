@@ -1,49 +1,17 @@
 workflow "File Test" {
-  on = "push"
   resolves = [
-    "ip-info",
-    "machine-id-1",
-    "machine-id-2"
+    "list-files",
   ]
+  on = "issue_comment"
 }
 
-action "100-mb-file" {
+action "dump-event" {
   uses = "docker://debian:latest"
-  args = "dd if=/dev/urandom of=file100mb.txt bs=1048576 count=100"
-}
-
-action "200-mb-file" {
-  uses = "docker://debian:latest"
-  args = "dd if=/dev/urandom of=file200mb.txt bs=1048576 count=200"
-  needs = ["100-mb-file"]
-}
-
-action "300-mb-file" {
-  uses = "docker://debian:latest"
-  args = "dd if=/dev/urandom of=file300mb.txt bs=1048576 count=300"
-  needs = ["100-mb-file"]
+  args = "cat /github/workflow/event.json"
 }
 
 action "list-files" {
   uses = "docker://debian:latest"
-  args = "ls -la"
-  needs = ["200-mb-file", "300-mb-file"]
+  needs = ["dump-event"]
+  args = "env"
 }
-
-action "ip-info" {
-  uses = "docker://appropriate/curl"
-  args = "ifconfig.co"
-  needs = ["list-files"]
-}
-
-action "machine-id-1" {
-  uses = "actions/docker/cli@6495e70"
-  args = "run -i --rm -v /etc:/hostetc alpine cat /hostetc/machine-id"
-}
-
-action "machine-id-2" {
-  needs = ["ip-info"]
-  uses = "actions/docker/cli@6495e70"
-  args = "run -i --rm -v /etc:/hostetc alpine cat /hostetc/machine-id"
-}
-
