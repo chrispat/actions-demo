@@ -2,9 +2,9 @@
 
 set -ex
 
-$user_url=$(cat $GITHUB_EVENT_PATH | jq -r .comment.user.url)
+user_url=$(cat $GITHUB_EVENT_PATH | jq -r .comment.user.url)
 
-$followers=$(curl -s $user_url | jq -r .followers)
+followers=$(curl -s $user_url | jq -r .followers)
 
 labels_url=$(cat $GITHUB_EVENT_PATH | jq -r .issue.url)/labels
 
