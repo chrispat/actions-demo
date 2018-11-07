@@ -8,7 +8,12 @@ followers=$(curl -s $user_url | jq -r .followers)
 
 labels_url=$(cat $GITHUB_EVENT_PATH | jq -r .issue.url)/labels
 
-if [ "$followers" -gt 10 ]
+if [ -z "$MIN_FOLLOWER_COUNT" ]
+then
+    MIN_FOLLOWER_COUNT=10
+fi
+
+if [ "$followers" -gt "$MIN_FOLLOWER_COUNT" ]
 then
     echo "High reputation user"
     curl -s -H "Authorization: token "$GITHUB_TOKEN \
