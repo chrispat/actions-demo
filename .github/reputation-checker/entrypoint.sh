@@ -17,4 +17,8 @@ then
         --data '{ "labels": ["high-reputation"]}' $labels_url
 else
     echo "Low reputation user"
+    curl -s -H "Authorization: token "$GITHUB_TOKEN \
+        -H "Accept: application/json" \
+        --request POST \
+        --data '{ "labels": ["low-reputation"]}' $labels_url
 fi
