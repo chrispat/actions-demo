@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - master
+  schedule:
+    - cron: "0 */1 * * *"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        message: ["Hello", "Goodbye", "Aloha"]
+        state: ["North Carolina", "Virginia", "Ohio", "Nevada", "Hawaii", "California"]
+        num-messages: [10, 100, 1000, 10000]
+    
+    steps:
+    - name: Say messge
+      run: |
+        for i in `seq ${{ matrix.num-messages }}`
+          echo ${{ matrix.message }}, ${{ matrix.state }!
+          sleep 2
+        done
