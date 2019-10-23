@@ -20,7 +20,7 @@ jobs:
     steps:
     - name: Say messge
       run: |
-        for i in `seq ${{ matrix.num-messages }}`
+        for i in `seq ${{ matrix.num-messages }}`;
           echo "${{ matrix.message }}, ${{ matrix.state }}!"
           sleep 2
         done
