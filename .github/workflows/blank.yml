@@ -21,6 +21,7 @@ jobs:
     - name: Say messge
       run: |
         for i in `seq ${{ matrix.num-messages }}`;
+        do
           echo "${{ matrix.message }}, ${{ matrix.state }}!"
           sleep 2
         done
