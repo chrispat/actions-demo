@@ -10,7 +10,8 @@ on:
 
 jobs:
   build:
-
+    env:
+      COMMIT_RANGE: ${{ github.event_name == 'pull_request' && format('{0}..{1}',github.event.base.sha, github.event.head.sha) || github.sha }}
     runs-on: ubuntu-latest
     
     steps:
